@@ -2,7 +2,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "/users",
-    "title": "Usurs",
+    "title": "Users",
     "group": "TelNet",
     "parameter": {
       "fields": {
@@ -25,7 +25,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "password_hash",
+            "field": "password",
             "description": "<ul> <li>Password do Usuário.</li> </ul>"
           },
           {
@@ -36,7 +36,14 @@ define({ "api": [
             "description": "<ul> <li>O usuário é admin (verdadeiro ou falso)</li> </ul>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "  {\n    \t\"name\":\"Teste\",\n\t    \"email\":\"teste5@teste.com.br\",\n\t    \"password\":\"123456\",\n\t    \"admin\":true\n  }",
+          "type": "json"
+        }
+      ]
     },
     "success": {
       "fields": {
@@ -53,10 +60,22 @@ define({ "api": [
       "examples": [
         {
           "title": "Sucesso",
-          "content": "HTTP/1.1 200 OK\n{\n   \"id\": \"\",\n   \"name\": \"Nome do User\",\n   \"email\": \"Email do User\",\n   \"password_hash\": \"password_hash\",\n   \"admin\": true or false,\n   \"updatedAt\": \"Data Atualização\",\n   \"createdAt\": \"Data Criação\"\n}",
+          "content": "HTTP/1.1 200 OK\n{\n   \"id\": \"Id do User\",\n   \"name\": \"Nome do User\",\n   \"email\": \"Email do User\",\n   \"admin\": true or false,\n}",
           "type": "json"
         }
       ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserAlreadyExist",
+            "description": "<p>O <code>email</code> do usuário já esta cadastrado.</p>"
+          }
+        ]
+      }
     },
     "version": "0.0.0",
     "filename": "./src/routes.js",
